@@ -23,6 +23,10 @@ public class UnityChanController : MonoBehaviour
     private GameObject scoreText;
     private int score = 0;
 
+    private bool isLButtonDown = false;
+    private bool isRButtonDown = false;
+    private bool isJButtonDown = false;
+
     void Start()
     {
         this.myAnimator = GetComponent<Animator>();
@@ -44,16 +48,16 @@ public class UnityChanController : MonoBehaviour
 
         float inputVelocityX = 0;
         float inputVelocityY = 0;
-        if(Input.GetKey(KeyCode.LeftArrow) && -this.movableRange < this.transform.position.x)
+        if((Input.GetKey(KeyCode.LeftArrow) || this.isLButtonDown) && -this.movableRange < this.transform.position.x)
         {
             inputVelocityX = -this.velocityX;
         }
-        else if(Input.GetKey(KeyCode.RightArrow) && this.transform.position.x < this.movableRange)
+        else if((Input.GetKey(KeyCode.RightArrow) || this.isRButtonDown) && this.transform.position.x < this.movableRange)
         {
             inputVelocityX = this.velocityX;
         }
         
-        if(Input.GetKey(KeyCode.Space)&& this.transform.position.y < 0.5f)
+        if((Input.GetKey(KeyCode.Space) || this.isJButtonDown)&& this.transform.position.y < 0.5f)
         {
             this.myAnimator.SetBool("Jump", true);
             inputVelocityY = this.velocityY;
@@ -88,5 +92,29 @@ public class UnityChanController : MonoBehaviour
             GetComponent<ParticleSystem>().Play();
             Destroy(other.gameObject);
         }
+    }
+    public void GetMyJumpButtonDown()
+    {
+        this.isJButtonDown = true;
+    }
+    public void GetMyJumptButtonUp()
+    {
+        this.isJButtonDown = false;
+    }
+    public void GetMyLeftButtonDown()
+    {
+        this.isLButtonDown = true;
+    }
+    public void GetMyLeftButtonUp()
+    {
+        this.isLButtonDown = false;
+    }
+    public void GetMyRightButtonDown()
+    {
+        this.isRButtonDown = true;
+    }
+    public void GetMyRightButtonUp()
+    {
+        this.isRButtonDown = false;
     }
 }
