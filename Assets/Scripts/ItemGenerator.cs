@@ -12,9 +12,6 @@ public class ItemGenerator : MonoBehaviour
     private int goalPos = 360;
     private float posRange = 3.4f;
 
-    //課題追加
-    private float deadLine = -10;
-
     void Start()
     {
         for(int i = startPos; i < goalPos; i += 15)
@@ -24,11 +21,11 @@ public class ItemGenerator : MonoBehaviour
             {
                 for(float j = -1; j <= 1; j += 0.4f)
                 {
-                    // GameObject cone = Instantiate(conePrefab);
-                    // cone.transform.position = new Vector3(4 * j, cone.transform.position.y, i);
-                    //発展課題
-                    GameObject cone = (GameObject)Resources.Load("TrafficConePrefab");
-                    Instantiate(cone, new Vector3(4 * j, cone.transform.position.y, i), Quaternion.identity);
+                    GameObject cone = Instantiate(conePrefab);
+                    cone.transform.position = new Vector3(4 * j, cone.transform.position.y, i);
+                    // //発展課題
+                    // GameObject cone = (GameObject)Resources.Load("TrafficConePrefab");
+                    // Instantiate(cone, new Vector3(4 * j, cone.transform.position.y, i), Quaternion.identity);
                 }
             }
             else
@@ -39,27 +36,22 @@ public class ItemGenerator : MonoBehaviour
                     int offsetZ = Random.Range(-5, 6);
                     if(1 <= item && item <= 6)
                     {
-                        // GameObject coin = Instantiate(coinPrefab);
-                        // coin.transform.position = new Vector3(posRange * j, coin.transform.position.y, i + offsetZ);
-                        //発展課題
-                        GameObject coin = (GameObject)Resources.Load("CoinPrefab");
-                        Instantiate(coin, new Vector3(posRange * j, coin.transform.position.y, i + offsetZ), Quaternion.identity);
+                        GameObject coin = Instantiate(coinPrefab);
+                        coin.transform.position = new Vector3(posRange * j, coin.transform.position.y, i + offsetZ);
+                        // //発展課題
+                        // GameObject coin = (GameObject)Resources.Load("CoinPrefab");
+                        // Instantiate(coin, new Vector3(posRange * j, coin.transform.position.y, i + offsetZ), Quaternion.identity);
                     }
                     else if(7 <= item && item <= 9)
                     {
-                        // GameObject car = Instantiate(carPrefab);
-                        // car.transform.position = new Vector3(posRange * j, car.transform.position.y, i + offsetZ);
-                        //発展課題
-                        GameObject car = (GameObject)Resources.Load("CarPrefab");
-                        Instantiate(car, new Vector3(posRange * j, car.transform.position.y, i + offsetZ), Quaternion.identity);
+                        GameObject car = Instantiate(carPrefab);
+                        car.transform.position = new Vector3(posRange * j, car.transform.position.y, i + offsetZ);
+                        // //発展課題
+                        // GameObject car = (GameObject)Resources.Load("CarPrefab");
+                        // Instantiate(car, new Vector3(posRange * j, car.transform.position.y, i + offsetZ), Quaternion.identity);
                     }   
                 }
             }
-            //課題追加
-            if(this.transform.position.z < this.deadLine)
-                {
-                    Destroy(gameObject);
-                }
         }
     }
 }
